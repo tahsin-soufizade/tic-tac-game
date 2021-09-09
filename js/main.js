@@ -30,6 +30,7 @@ const winningCombination = [
 startGame();
 
 function startGame() {
+    circleTurn = false;
     cellEllements.forEach(cell => {
         cell.classList.remove(o_class);
         cell.classList.remove(x_class);
