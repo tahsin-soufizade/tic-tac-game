@@ -1,0 +1,120 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+ 
+ :root {
+     --cell-size: 100px;
+     --mark-size: calc(var(--cell-size) * .75)
+ }
+ 
+ body {
+     background: #0a224e;
+     width: 100vw;
+     height: 100vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ 
+ #board {
+     display: flex;
+     flex-wrap: wrap;
+     width: 300px;
+ }
+ 
+ .cell {
+     width: var(--cell-size);
+     height: var(--cell-size);
+     border: 2px solid #fff;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     position: relative;
+ }
+ /* remove top border */
+ 
+ .cell:first-child,
+ .cell:nth-child(2),
+ .cell:nth-child(3) {
+     border-top: 0;
+ }
+ /* remove left border */
+ 
+ .cell:nth-child(3n + 1) {
+     border-left: 0;
+ }
+ /* remove right border */
+ 
+ .cell:nth-child(3n + 3) {
+     border-right: 0;
+ }
+ /* remove bottom border */
+ 
+ .cell:last-child,
+ .cell:nth-child(7),
+ .cell:nth-child(8) {
+     border-bottom: 0;
+ }
+ /****************** set X sign ******************/
+ 
+ .cell.x::after,
+ .cell.x::before,
+ #board.x .cell:not(.x):not(.o):hover::after,
+ #board.x .cell:not(.x):not(.o):hover::before {
+     content: '';
+     width: calc(var(--cell-size) * .1);
+     height: var(--mark-size);
+     background-color: #fff;
+     position: absolute;
+     border-radius: 10px;
+ }
+ 
+ .cell.x::after,
+ #board.x .cell:not(.x):not(.o):hover::after {
+     transform: rotate(-45deg);
+ }
+ 
+ .cell.x::before,
+ #board.x .cell:not(.x):not(.o):hover::before {
+     transform: rotate(45deg);
+ }
+ /****************** set O sign ******************/
+ 
+ .cell.o::after,
+ .cell.o::before,
+ #board.o .cell:not(.x):not(.o):hover::after,
+ #board.o .cell:not(.x):not(.o):hover::before {
+     content: '';
+     border-radius: 50%;
+     position: absolute;
+ }
+ 
+ .cell.o::after,
+ #board.o .cell:not(.x):not(.o):hover::after {
+     width: var(--mark-size);
+     height: var(--mark-size);
+     background-color: #fff;
+     z-index: 1;
+ }
+ 
+ .cell.o::before,
+ #board.o .cell:not(.x):not(.o):hover::before {
+     width: calc(var(--mark-size) * .77);
+     height: calc(var(--mark-size) * .77);
+     background-color: #0a224e;
+     z-index: 3;
+ }
+ /* change X && O sign color when hover in cell box */
+ 
+ #board.x .cell:not(.x):not(.o)::after,
+ #board.x .cell:not(.x):not(.o)::before,
+ #board.o .cell:not(.x):not(.o)::after {
+     background: #bbb !important;
+ }
+ 
+ #board .cell.o,
+ #board .cell.x {
+     cursor: not-allowed;
+ }
